@@ -7,24 +7,28 @@ public class AgentTest {
     @Test
     void shouldConductBehaviour() {
         final var agentState = new State();
-        final var behaviour = new Agent.Behaviour<State>() {
-
-            @Override
-            public void setup(State state) {
-                state.log("setup ");
-            }
-
-            @Override
-            public void conduct(State a) {
-                a.log("conduct ");
-            }
-        };
+        final var behaviour = new LoggingBehaviour("");
         final var agent = new Agent<>(agentState);
         agent.setBehaviour(behaviour);
 
         agent.update();
 
-        assertEquals("setup conduct ", agentState.log);
+        assertEquals("start conduct ", agentState.log);
+    }
+
+    @Test
+    void shouldSwapBehaviours() {
+        final var agentState = new State();
+        final var agent = new Agent<>(agentState);
+        final var a = new LoggingBehaviour("A");
+        final var b = new LoggingBehaviour("B");
+
+        agent.setBehaviour(a);
+        agent.update();
+        agent.setBehaviour(b);
+        agent.update();
+
+        assertEquals("startA conductA endA startB conductB ", agentState.log);
     }
 
     private static class State {
@@ -35,4 +39,26 @@ public class AgentTest {
         }
     }
 
+    private static class LoggingBehaviour implements Agent.Behaviour<State> {
+        private final String name;
+
+        public LoggingBehaviour(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public void start(State state) {
+            state.log("start" + name + " ");
+        }
+
+        @Override
+        public void conduct(State state) {
+            state.log("conduct" + name + " ");
+        }
+
+        @Override
+        public void end(State state) {
+            state.log("end" + name + " ");
+        }
+    }
 }

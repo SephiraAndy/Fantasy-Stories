@@ -13,12 +13,16 @@ public class Agent<AgentState> {
     }
 
     public void setBehaviour(Behaviour<AgentState> behaviour) {
+        if (this.behaviour != null) {
+            this.behaviour.end(state);
+        }
         this.behaviour = behaviour;
-        behaviour.setup(state);
+        behaviour.start(state);
     }
 
     public interface Behaviour<AgentState> {
-        void setup(AgentState state);
+        void start(AgentState state);
         void conduct(AgentState state);
+        void end(AgentState state);
     }
 }
