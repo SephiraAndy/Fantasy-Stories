@@ -19,7 +19,8 @@ public class AgentTest {
                 a.log("conduct ");
             }
         };
-        final var agent = new Agent<>(agentState, behaviour);
+        final var agent = new Agent<>(agentState);
+        agent.setBehaviour(behaviour);
 
         agent.update();
 
