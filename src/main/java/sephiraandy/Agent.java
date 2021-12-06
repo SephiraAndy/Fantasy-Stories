@@ -15,7 +15,7 @@ public class Agent<AgentState> {
     }
 
     public interface Behaviour<AgentState> {
-        void setup(AgentState t);
-        void conduct(AgentState t);
+        void setup(AgentState state);
+        void conduct(AgentState state);
     }
 }
