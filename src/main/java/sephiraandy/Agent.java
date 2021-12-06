@@ -4,16 +4,18 @@ public class Agent<AgentState> {
     private final Behaviour<AgentState> behaviour;
     private final AgentState state;
 
-    public Agent(AgentState t, Behaviour<AgentState> behaviour) {
-        this.state = t;
+    public Agent(AgentState state, Behaviour<AgentState> behaviour) {
+        this.state = state;
         this.behaviour = behaviour;
+        behaviour.setup(state);
     }
 
     public void update() {
         behaviour.conduct(state);
     }
 
-    public interface Behaviour<T> {
-        void conduct(T t);
+    public interface Behaviour<AgentState> {
+        void setup(AgentState t);
+        void conduct(AgentState t);
     }
 }

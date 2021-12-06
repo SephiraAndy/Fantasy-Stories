@@ -10,15 +10,20 @@ public class AgentTest {
         final var behaviour = new Agent.Behaviour<State>() {
 
             @Override
+            public void setup(State state) {
+                state.log("setup ");
+            }
+
+            @Override
             public void conduct(State a) {
-                a.log("conduct");
+                a.log("conduct ");
             }
         };
         final var agent = new Agent<>(agentState, behaviour);
 
         agent.update();
 
-        assertEquals("conduct", agentState.log);
+        assertEquals("setup conduct ", agentState.log);
     }
 
     private static class State {
