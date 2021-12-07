@@ -13,6 +13,6 @@ public class RestInCamp implements Behaviour<AdventurerState> {
 
     @Override
     public void end(AdventurerState adventurerState) {
-
+        adventurerState.packUpCamp();
     }
 }

@@ -26,9 +26,20 @@ class RestInCampTest {
         assertTrue(adventurerState.rested);
     }
 
+    @Test
+    void shouldEndByPackingUpCamp() {
+        final var rest = new RestInCamp();
+        final var adventurerState = new MockAdventurerState();
+
+        rest.end(adventurerState);
+
+        assertTrue(adventurerState.packedUpCamp);
+    }
+
     private static class MockAdventurerState extends AdventurerState {
         public boolean rested = false;
         private boolean hasSetUpCamp = false;
+        private boolean packedUpCamp = false;
 
         public MockAdventurerState() {
             super(null, null);
@@ -42,6 +53,11 @@ class RestInCampTest {
         @Override
         public void rest() {
             rested = true;
+        }
+
+        @Override
+        public void packUpCamp() {
+            packedUpCamp = true;
         }
     }
 }

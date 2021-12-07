@@ -35,4 +35,8 @@ public class AdventurerState {
     public void setUpCamp() {}
 
     public void rest() {}
+
+    public void packUpCamp() {
+
+    }
 }
