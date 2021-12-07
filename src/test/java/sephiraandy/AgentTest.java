@@ -1,5 +1,6 @@
+package sephiraandy;
+
 import org.junit.jupiter.api.Test;
-import sephiraandy.Agent;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -39,7 +40,7 @@ public class AgentTest {
         }
     }
 
-    private static class LoggingBehaviour implements Agent.Behaviour<State> {
+    private static class LoggingBehaviour implements Behaviour<State> {
         private final String name;
 
         public LoggingBehaviour(String name) {

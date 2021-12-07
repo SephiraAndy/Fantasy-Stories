@@ -19,10 +19,4 @@ public class Agent<AgentState> {
         this.behaviour = behaviour;
         behaviour.start(state);
     }
-
-    public interface Behaviour<AgentState> {
-        void start(AgentState state);
-        void conduct(AgentState state);
-        void end(AgentState state);
-    }
 }
