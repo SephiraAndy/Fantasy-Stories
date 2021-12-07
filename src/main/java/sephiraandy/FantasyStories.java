@@ -10,12 +10,6 @@ public class FantasyStories implements Behaviour<Application> {
         new Thread(application::run).start();
     }
 
-    @Override
-    public void start(Application application) {
-        System.out.println("simulation started");
-
-    }
-
     // Adventurer
     //  - adventure
     //      - bags full -> sell loot
@@ -27,6 +21,10 @@ public class FantasyStories implements Behaviour<Application> {
     //  - drink at inn
     //      - no more gold -> adventure
 
+    @Override
+    public void start(Application application) {
+        System.out.println("simulation started");
+    }
 
     @Override
     public void conduct(Application application) {
