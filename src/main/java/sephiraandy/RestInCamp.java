@@ -8,7 +8,7 @@ public class RestInCamp implements Behaviour<AdventurerState> {
 
     @Override
     public void conduct(AdventurerState adventurerState) {
-
+        adventurerState.rest();
     }
 
     @Override

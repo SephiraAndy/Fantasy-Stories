@@ -2,9 +2,7 @@ package sephiraandy;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.function.Consumer;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RestInCampTest {
 
@@ -18,7 +16,18 @@ class RestInCampTest {
         assertTrue(adventurerState.hasSetUpCamp);
     }
 
+    @Test
+    void shouldRest() {
+        final var rest = new RestInCamp();
+        final var adventurerState = new MockAdventurerState();
+
+        rest.conduct(adventurerState);
+
+        assertTrue(adventurerState.rested);
+    }
+
     private static class MockAdventurerState extends AdventurerState {
+        public boolean rested = false;
         private boolean hasSetUpCamp = false;
 
         public MockAdventurerState() {
@@ -28,6 +37,11 @@ class RestInCampTest {
         @Override
         public void setUpCamp() {
             hasSetUpCamp = true;
+        }
+
+        @Override
+        public void rest() {
+            rested = true;
         }
     }
 }
