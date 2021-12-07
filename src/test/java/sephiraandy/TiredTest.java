@@ -21,4 +21,21 @@ class TiredTest {
 
         assertTrue(isTired);
     }
+
+    @Test
+    void shouldPassAdventurerUntiredness() {
+
+        final var tired = new Tired();
+
+        final var state = new AdventurerState(null, null) {
+            @Override
+            public boolean isTired() {
+                return false;
+            }
+        };
+
+        var isTired = tired.test(state);
+
+        assertFalse(isTired);
+    }
 }

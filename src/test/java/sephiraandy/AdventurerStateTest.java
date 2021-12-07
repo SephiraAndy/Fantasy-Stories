@@ -66,6 +66,45 @@ class AdventurerStateTest {
         assertEquals("Another Adventurer gained fatigue. Their tiredness level is at 2.", output.text);
     }
 
+    @Test
+    void shouldNotBeTiredAt6Fatigue() {
+        final var output = new MockOutput();
+        final var name = "Adventurer";
+        final var adventurer = new AdventurerState(output, name);
+
+        for (int i = 0; i < 6; i++) {
+            adventurer.tire();
+        }
+
+        assertFalse(adventurer.isTired());
+    }
+
+    @Test
+    void shouldBeTiredAt7Fatigue() {
+        final var output = new MockOutput();
+        final var name = "Adventurer";
+        final var adventurer = new AdventurerState(output, name);
+
+        for (int i = 0; i < 7; i++) {
+            adventurer.tire();
+        }
+
+        assertTrue(adventurer.isTired());
+    }
+
+    @Test
+    void shouldBeTiredAt8Fatigue() {
+        final var output = new MockOutput();
+        final var name = "Adventurer";
+        final var adventurer = new AdventurerState(output, name);
+
+        for (int i = 0; i < 8; i++) {
+            adventurer.tire();
+        }
+
+        assertTrue(adventurer.isTired());
+    }
+
     private static class MockOutput implements Consumer<String> {
         private String text;
         @Override

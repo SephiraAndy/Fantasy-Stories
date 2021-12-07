@@ -29,6 +29,6 @@ public class AdventurerState {
     }
 
     public boolean isTired() {
-        return false;
+        return fatigue >= 7;
     }
 }
