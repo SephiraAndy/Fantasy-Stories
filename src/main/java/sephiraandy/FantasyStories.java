@@ -1,5 +1,7 @@
 package sephiraandy;
 
+import java.util.function.Predicate;
+
 public class FantasyStories implements Behaviour<Application> {
 
     private int ticks = 0;
@@ -24,18 +26,16 @@ public class FantasyStories implements Behaviour<Application> {
 
     @Override
     public void start(Application application) {
-        System.out.println("simulation started");
         adventurer = new Agent<>(new AdventurerState(System.out::println, "Alice"));
         final var adventure = new Adventure();
         final var restInCamp = new RestInCamp();
-        final var tired = new Tired();
         adventurer.setBehaviour(adventure);
+        final var tired = new Tired();
         adventurer.setTransition(new Agent.Transition<>(adventure, restInCamp, tired));
     }
 
     @Override
     public void conduct(Application application) {
-        System.out.println("Simulation step");
         ++ticks;
         adventurer.update();
         if (ticks >= 100) {

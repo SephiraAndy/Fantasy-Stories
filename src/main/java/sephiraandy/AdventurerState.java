@@ -27,4 +27,8 @@ public class AdventurerState {
         ++fatigue;
         output.accept(name + " gained fatigue. Their tiredness level is at " + fatigue + ".");
     }
+
+    public boolean isTired() {
+        return false;
+    }
 }
