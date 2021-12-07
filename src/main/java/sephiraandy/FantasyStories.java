@@ -3,6 +3,7 @@ package sephiraandy;
 public class FantasyStories implements Behaviour<Application> {
 
     private int ticks = 0;
+    private Agent<AdventurerState> adventurer;
 
     public static void main(String[] args) {
         final var fantasyStories = new FantasyStories();
@@ -12,7 +13,7 @@ public class FantasyStories implements Behaviour<Application> {
 
     // Adventurer
     //  - adventure
-    //      - bags full -> sell loot
+    //      - bags are full -> sell loot
     //      - tired -> rest in camp
     //  - rest in camp
     //      - fully recovered -> adventure
@@ -24,12 +25,19 @@ public class FantasyStories implements Behaviour<Application> {
     @Override
     public void start(Application application) {
         System.out.println("simulation started");
+        adventurer = new Agent<>(new AdventurerState(System.out::println, "Alice"));
+        final var adventure = new Adventure();
+        final var restInCamp = new RestInCamp();
+        final var tired = new Tired();
+        adventurer.setBehaviour(adventure);
+        adventurer.setTransition(new Agent.Transition<>(adventure, restInCamp, tired));
     }
 
     @Override
     public void conduct(Application application) {
         System.out.println("Simulation step");
         ++ticks;
+        adventurer.update();
         if (ticks >= 100) {
             application.stop();
         }

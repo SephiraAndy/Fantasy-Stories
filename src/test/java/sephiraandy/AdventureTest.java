@@ -3,6 +3,8 @@ package sephiraandy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.function.Consumer;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AdventureTest {
@@ -19,7 +21,7 @@ class AdventureTest {
 
     @Test
     void shouldStartAdventuresInTheGoblinCaves() {
-        final var mockAdventurerState = new MockAdventurerState();
+        final var mockAdventurerState = new MockAdventurerState(null, null);
         final var adventurer = new Agent<AdventurerState>(mockAdventurerState);
 
         adventurer.setBehaviour(new Adventure());
@@ -29,7 +31,7 @@ class AdventureTest {
 
     @Test
     void shouldCollectLootWhenAdventuring() {
-        final var mockAdventurerState = new MockAdventurerState();
+        final var mockAdventurerState = new MockAdventurerState(null, null);
         final var adventurer = new Agent<AdventurerState>(mockAdventurerState);
         adventurer.setBehaviour(new Adventure());
 
@@ -41,7 +43,7 @@ class AdventureTest {
 
     @Test
     void shouldTireWhenAdventuring() {
-        final var mockAdventurerState = new MockAdventurerState();
+        final var mockAdventurerState = new MockAdventurerState(null, null);
         final var adventurer = new Agent<AdventurerState>(mockAdventurerState);
         adventurer.setBehaviour(new Adventure());
 
@@ -52,6 +54,10 @@ class AdventureTest {
     }
 
     private static class MockAdventurerState extends AdventurerState {
+        public MockAdventurerState(Consumer<String> output, String name) {
+            super(output, name);
+        }
+
         @Override
         public void setLocation(String nextLocation) {
             location = nextLocation;
