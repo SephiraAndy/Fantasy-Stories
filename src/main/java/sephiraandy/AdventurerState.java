@@ -31,4 +31,6 @@ public class AdventurerState {
     public boolean isTired() {
         return fatigue >= 7;
     }
+
+    public void setUpCamp() {}
 }
