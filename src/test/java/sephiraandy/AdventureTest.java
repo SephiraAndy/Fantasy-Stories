@@ -9,6 +9,7 @@ class AdventureTest {
 
     private static String location;
     private static int loot;
+    private static int fatigue;
 
     @BeforeEach
     void setUp() {
@@ -38,6 +39,18 @@ class AdventureTest {
         assertEquals(2, loot);
     }
 
+    @Test
+    void shouldTireWhenAdventuring() {
+        final var mockAdventurerState = new MockAdventurerState();
+        final var adventurer = new Agent<AdventurerState>(mockAdventurerState);
+        adventurer.setBehaviour(new Adventure());
+
+        adventurer.update();
+        adventurer.update();
+
+        assertEquals(2, fatigue);
+    }
+
     private static class MockAdventurerState extends AdventurerState {
         @Override
         public void setLocation(String nextLocation) {
@@ -47,6 +60,11 @@ class AdventureTest {
         @Override
         public void collectLoot() {
             ++loot;
+        }
+
+        @Override
+        public void tire() {
+            ++fatigue;
         }
     }
 }

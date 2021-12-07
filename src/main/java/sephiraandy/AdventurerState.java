@@ -4,4 +4,6 @@ public class AdventurerState {
     public void setLocation(String nextLocation) { }
 
     public void collectLoot() { }
+
+    public void tire() { }
 }
