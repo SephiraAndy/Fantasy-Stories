@@ -8,7 +8,7 @@ public class Adventure implements Behaviour<AdventurerState> {
 
     @Override
     public void conduct(AdventurerState adventurerState) {
-
+        adventurerState.collectLoot();
     }
 
     @Override
