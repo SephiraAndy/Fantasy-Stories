@@ -32,11 +32,21 @@ public class AdventurerState {
         return fatigue >= 7;
     }
 
-    public void setUpCamp() {}
+    public void setUpCamp() {
+        output.accept(name + " is setting up camp.");
+    }
 
-    public void rest() {}
+    public void rest() {
+        fatigue = Math.max(0, fatigue - 2);
+
+        output.accept(name + " is resting.");
+    }
 
     public void packUpCamp() {
+        output.accept(name + " is packing up their camp.");
+    }
 
+    public boolean isFullyRested() {
+        return fatigue == 0;
     }
 }

@@ -105,6 +105,89 @@ class AdventurerStateTest {
         assertTrue(adventurer.isTired());
     }
 
+    @Test
+    void shouldExpressSettingUpCamp() {
+        final var output = new MockOutput();
+        final var name = "Adventurer";
+        final var adventurer = new AdventurerState(output, name);
+
+        adventurer.setUpCamp();
+
+        assertEquals("Adventurer is setting up camp.", output.text);
+    }
+
+    @Test
+    void shouldExpressResting() {
+        final var output = new MockOutput();
+        final var name = "Adventurer";
+        final var adventurer = new AdventurerState(output, name);
+
+        adventurer.rest();
+
+        assertEquals("Adventurer is resting.", output.text);
+    }
+
+    @Test
+    void shouldBecomeFullyRestedAfterRestingLongEnough() {
+        final var output = new MockOutput();
+        final var name = "Adventurer";
+        final var adventurer = new AdventurerState(output, name);
+        adventurer.tire();
+        adventurer.tire();
+
+        adventurer.rest();
+
+        assertTrue(adventurer.isFullyRested());
+    }
+
+    @Test
+    void shouldNotBeFullyRestedWhenTired() {
+        final var output = new MockOutput();
+        final var name = "Adventurer";
+        final var adventurer = new AdventurerState(output, name);
+
+        adventurer.tire();
+
+        assertFalse(adventurer.isFullyRested());
+    }
+
+    @Test
+    void shouldBeFullyRestedWhenPartiallyTired() {
+        final var output = new MockOutput();
+        final var name = "Adventurer";
+        final var adventurer = new AdventurerState(output, name);
+
+        adventurer.tire();
+
+        adventurer.rest();
+
+        assertTrue(adventurer.isFullyRested());
+    }
+
+    @Test
+    void shouldBePartiallyTiredTiringAfterPartialRest() {
+        final var output = new MockOutput();
+        final var name = "Adventurer";
+        final var adventurer = new AdventurerState(output, name);
+
+        adventurer.tire();
+        adventurer.rest();
+        adventurer.tire();
+
+        assertFalse(adventurer.isFullyRested());
+    }
+
+    @Test
+    void shouldExpressPackingUpCamp() {
+        final var output = new MockOutput();
+        final var name = "Adventurer";
+        final var adventurer = new AdventurerState(output, name);
+
+        adventurer.packUpCamp();
+
+        assertEquals("Adventurer is packing up their camp.", output.text);
+    }
+
     private static class MockOutput implements Consumer<String> {
         private String text;
         @Override
