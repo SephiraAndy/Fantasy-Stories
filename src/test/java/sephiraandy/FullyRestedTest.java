@@ -10,7 +10,7 @@ class FullyRestedTest {
 
         final var fullyRested = new FullyRested();
 
-        final var state = new AdventurerState(null, null) {
+        final var state = new AdventurerState(null, null, 0) {
             @Override
             public boolean isFullyRested() {
                 return true;
@@ -27,7 +27,7 @@ class FullyRestedTest {
 
         final var fullyRested = new FullyRested();
 
-        final var state = new AdventurerState(null, null) {
+        final var state = new AdventurerState(null, null, 0) {
             @Override
             public boolean isFullyRested() {
                 return false;

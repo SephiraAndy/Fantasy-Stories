@@ -42,7 +42,7 @@ class RestInCampTest {
         private boolean packedUpCamp = false;
 
         public MockAdventurerState() {
-            super(null, null);
+            super(null, null, 0);
         }
 
         @Override

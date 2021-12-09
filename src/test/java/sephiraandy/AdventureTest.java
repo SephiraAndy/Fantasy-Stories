@@ -55,7 +55,7 @@ class AdventureTest {
 
     private static class MockAdventurerState extends AdventurerState {
         public MockAdventurerState(Consumer<String> output, String name) {
-            super(output, name);
+            super(output, name, 10);
         }
 
         @Override

@@ -10,7 +10,7 @@ class TiredTest {
 
         final var tired = new Tired();
 
-        final var state = new AdventurerState(null, null) {
+        final var state = new AdventurerState(null, null, 0) {
             @Override
             public boolean isTired() {
                 return true;
@@ -27,7 +27,7 @@ class TiredTest {
 
         final var tired = new Tired();
 
-        final var state = new AdventurerState(null, null) {
+        final var state = new AdventurerState(null, null, 0) {
             @Override
             public boolean isTired() {
                 return false;

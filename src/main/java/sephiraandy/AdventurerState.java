@@ -5,12 +5,14 @@ import java.util.function.Consumer;
 public class AdventurerState {
     private final Consumer<String> output;
     private final String name;
+    private final int bagCapacity;
     private int loot = 0;
     private int fatigue = 0;
 
-    public AdventurerState(Consumer<String> output, String name) {
+    public AdventurerState(Consumer<String> output, String name, int bagCapacity) {
         this.output = output;
         this.name = name;
+        this.bagCapacity = bagCapacity;
     }
 
     public void setLocation(String nextLocation) {
@@ -38,7 +40,6 @@ public class AdventurerState {
 
     public void rest() {
         fatigue = Math.max(0, fatigue - 2);
-
         output.accept(name + " is resting.");
     }
 
@@ -48,5 +49,9 @@ public class AdventurerState {
 
     public boolean isFullyRested() {
         return fatigue == 0;
+    }
+
+    public boolean areBagsFull() {
+        return false;
     }
 }
