@@ -1,8 +1,6 @@
 package sephiraandy;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class Agent<AgentState> {
@@ -40,7 +38,9 @@ public class Agent<AgentState> {
             final var transitionList = transitions.get(stateTransition.from);
             transitionList.add(stateTransition);
         } else {
-            transitions.put(stateTransition.from, List.of(stateTransition));
+            final var transitionList = new ArrayList<Transition<AgentState>>();
+            transitionList.add(stateTransition);
+            transitions.put(stateTransition.from, transitionList);
         }
     }
 

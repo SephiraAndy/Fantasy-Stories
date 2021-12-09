@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AdventurerStateTest {
 
-    private String name = "Adventurer";
     private MockOutput output;
     private AdventurerState adventurer;
 
     @BeforeEach
     void setUp() {
         output = new MockOutput();
+        String name = "Adventurer";
         adventurer = new AdventurerState(output, name, 10);
     }
 
@@ -125,6 +125,37 @@ class AdventurerStateTest {
     void shouldExpressPackingUpCamp() {
         adventurer.packUpCamp();
         assertEquals("Adventurer is packing up their camp.", output.text);
+    }
+
+    @Test
+    void shouldTellThatBagsAreNotFullWhenAlmostFull() {
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+
+        assertFalse(adventurer.areBagsFull());
+    }
+
+    @Test
+    void shouldTellThatBagsArFullWhenFull() {
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+        adventurer.collectLoot();
+
+        assertTrue(adventurer.areBagsFull());
     }
 
     private static class MockOutput implements Consumer<String> {

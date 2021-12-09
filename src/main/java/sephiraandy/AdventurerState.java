@@ -52,6 +52,6 @@ public class AdventurerState {
     }
 
     public boolean areBagsFull() {
-        return false;
+        return loot == bagCapacity;
     }
 }

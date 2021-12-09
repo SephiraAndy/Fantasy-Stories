@@ -1,9 +1,9 @@
 package sephiraandy;
 
-public class SellLoot implements Behaviour<AdventurerState> {
+public class DrinkAtInn implements Behaviour<AdventurerState> {
     @Override
     public void start(AdventurerState adventurerState) {
-        
+
     }
 
     @Override
