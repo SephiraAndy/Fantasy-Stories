@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/state-diagram
+
+Adventure : **setLocation("The Goblin Cave")**
+Adventure : tire
+Adventure : collectLoot
+
+RestInCamp : **setUpCamp**
+RestInCamp : rest
+RestInCamp : __packUpCamp__
+
+SellLoot : **setLocation("Pawn Aplenty")**
+SellLoot : sellLoot
+
+DrinkAtInn : **setLocation("The Golden Goblin")**
+DrinkAtInn : buyAle
+DrinkAtInn : drinkAle
+
+[*] --> Adventure
+RestInCamp --> Adventure : FullyRecovered
+Adventure --> SellLoot : BagsAreFull
+Adventure --> RestInCamp : Tired
+SellLoot --> DrinkAtInn : BagsAreEmpty
+DrinkAtInn -> Adventure : NoMoreGold
+
+@enduml
