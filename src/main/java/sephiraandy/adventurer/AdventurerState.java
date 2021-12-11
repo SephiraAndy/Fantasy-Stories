@@ -1,8 +1,8 @@
-package sephiraandy;
+package sephiraandy.adventurer;
 
 import java.util.function.Consumer;
 
-public class AdventurerState {
+public class AdventurerState implements Adventurer {
     private final Consumer<String> output;
     private final String name;
     private final int bagCapacity;

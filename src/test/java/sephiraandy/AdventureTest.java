@@ -1,76 +1,43 @@
 package sephiraandy;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import sephiraandy.adventurer.Adventurer;
+import sephiraandy.adventurer.behaviours.Adventure;
 
-import java.util.function.Consumer;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AdventureTest {
-
-    private static String location;
-    private static int loot;
-    private static int fatigue;
-
-    @BeforeEach
-    void setUp() {
-        location = null;
-        loot = 0;
-    }
-
     @Test
     void shouldStartAdventuresInTheGoblinCaves() {
         final var mockAdventurerState = new MockAdventurerState(null, null);
-        final var adventurer = new Agent<AdventurerState>(mockAdventurerState);
+        final var adventurer = new Agent<Adventurer>(mockAdventurerState);
 
         adventurer.setBehaviour(new Adventure());
 
-        assertEquals("The Goblin Cave", location);
+        assertEquals("The Goblin Cave", mockAdventurerState.location);
     }
 
     @Test
     void shouldCollectLootWhenAdventuring() {
         final var mockAdventurerState = new MockAdventurerState(null, null);
-        final var adventurer = new Agent<AdventurerState>(mockAdventurerState);
+        final var adventurer = new Agent<Adventurer>(mockAdventurerState);
         adventurer.setBehaviour(new Adventure());
 
         adventurer.update();
         adventurer.update();
 
-        assertEquals(2, loot);
+        assertEquals(2, mockAdventurerState.loot);
     }
 
     @Test
     void shouldTireWhenAdventuring() {
         final var mockAdventurerState = new MockAdventurerState(null, null);
-        final var adventurer = new Agent<AdventurerState>(mockAdventurerState);
+        final var adventurer = new Agent<Adventurer>(mockAdventurerState);
         adventurer.setBehaviour(new Adventure());
 
         adventurer.update();
         adventurer.update();
 
-        assertEquals(2, fatigue);
-    }
-
-    private static class MockAdventurerState extends AdventurerState {
-        public MockAdventurerState(Consumer<String> output, String name) {
-            super(output, name, 10);
-        }
-
-        @Override
-        public void setLocation(String nextLocation) {
-            location = nextLocation;
-        }
-
-        @Override
-        public void collectLoot() {
-            ++loot;
-        }
-
-        @Override
-        public void tire() {
-            ++fatigue;
-        }
+        assertEquals(2, mockAdventurerState.fatigue);
     }
 }

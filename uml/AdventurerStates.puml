@@ -1,16 +1,11 @@
 @startuml
 'https://plantuml.com/state-diagram
 
-
-state Adventure
-state SellLoot
-state RestInCamp
-state DrinkAtInn
-
-RestInCamp -> Adventure : FullyRecovered
+[*] --> Adventure
+RestInCamp --> Adventure : FullyRecovered
 Adventure --> SellLoot : BagsAreFull
-Adventure -> RestInCamp : Tired
-SellLoot -> DrinkAtInn : BagsAreEmpty
+Adventure --> RestInCamp : Tired
+SellLoot --> DrinkAtInn : BagsAreEmpty
 DrinkAtInn -> Adventure : NoMoreGold
 
 @enduml

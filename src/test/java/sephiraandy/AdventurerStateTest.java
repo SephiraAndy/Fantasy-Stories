@@ -2,6 +2,7 @@ package sephiraandy;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import sephiraandy.adventurer.AdventurerState;
 
 import java.util.function.Consumer;
 

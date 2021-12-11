@@ -1,11 +1,14 @@
 package sephiraandy;
 
-import java.util.function.Predicate;
+import sephiraandy.adventurer.Adventurer;
+import sephiraandy.adventurer.AdventurerState;
+import sephiraandy.adventurer.behaviours.*;
+import sephiraandy.adventurer.predicates.*;
 
 public class FantasyStories implements Behaviour<Application> {
 
     private int ticks = 0;
-    private Agent<AdventurerState> adventurer;
+    private Agent<Adventurer> adventurer;
 
     public static void main(String[] args) {
         final var fantasyStories = new FantasyStories();

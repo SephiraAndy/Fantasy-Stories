@@ -1,6 +1,8 @@
 package sephiraandy;
 
 import org.junit.jupiter.api.Test;
+import sephiraandy.adventurer.AdventurerState;
+import sephiraandy.adventurer.predicates.BagsAreFull;
 
 import static org.junit.jupiter.api.Assertions.*;
 
