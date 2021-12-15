@@ -2,8 +2,6 @@ package sephiraandy;
 
 import sephiraandy.adventurer.Adventurer;
 import sephiraandy.adventurer.AdventurerState;
-import sephiraandy.adventurer.behaviours.*;
-import sephiraandy.adventurer.predicates.*;
 
 public class FantasyStories implements Behaviour<Application> {
 
@@ -18,32 +16,22 @@ public class FantasyStories implements Behaviour<Application> {
 
     @Override
     public void start(Application application) {
-        adventurer = new Agent<>(new AdventurerState(System.out::println, "Alice", 10));
+        final var adventurerBehaviours = new Adventurer.Conductor();
 
-        final var adventure = new Adventure();
-        final var restInCamp = new RestInCamp();
-        final var sellLoot = new SellLoot();
-        final var drinkAtInn = new DrinkAtInn();
-
-        final var tired = new Tired();
-        final var fullyRested = new FullyRested();
-        final var bagsAreFull = new BagsAreFull();
-        final var bagsAreEmpty = new BagsAreEmpty();
-        final var noMoreGold = new NoMoreGold();
-
-        adventurer.setBehaviour(adventure);
-        adventurer.setTransition(new Agent.Transition<>(adventure, restInCamp, tired));
-        adventurer.setTransition(new Agent.Transition<>(restInCamp, adventure, fullyRested));
-        adventurer.setTransition(new Agent.Transition<>(adventure, sellLoot, bagsAreFull));
-        adventurer.setTransition(new Agent.Transition<>(sellLoot, drinkAtInn, bagsAreEmpty));
-        adventurer.setTransition(new Agent.Transition<>(drinkAtInn, adventure, noMoreGold));
+        adventurer = new Agent<>(
+                new AdventurerState(
+                        System.out::println,
+                        "Alice",
+                        10),
+                adventurerBehaviours,
+                adventurerBehaviours.startBehaviour());
     }
 
     @Override
     public void conduct(Application application) {
         ++ticks;
         adventurer.update();
-        if (ticks >= 100) {
+        if (ticks >= 1) {
             application.stop();
         }
     }

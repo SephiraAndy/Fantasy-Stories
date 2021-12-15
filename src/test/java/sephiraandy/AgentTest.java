@@ -11,74 +11,12 @@ public class AgentTest {
     void shouldConductBehaviour() {
         final var agentState = new State();
         final var behaviour = new LoggingBehaviour("");
-        final var agent = new Agent<>(agentState);
-        agent.setBehaviour(behaviour);
+        final var conductor = new BehaviourConductor<State>();
+        final var agent = new Agent<>(agentState, conductor, behaviour);
 
         agent.update();
 
         assertEquals("start conduct ", agentState.log);
-    }
-
-    @Test
-    void shouldSwapBehaviours() {
-        final var agentState = new State();
-        final var agent = new Agent<>(agentState);
-        final var a = new LoggingBehaviour("A");
-        final var b = new LoggingBehaviour("B");
-
-        agent.setBehaviour(a);
-        agent.update();
-        agent.setBehaviour(b);
-        agent.update();
-
-        assertEquals("startA conductA endA startB conductB ", agentState.log);
-    }
-
-    @Test
-    void shouldTransitionBetweenStates() {
-        final var agentState = new State();
-        final var agent = new Agent<>(agentState);
-        final var a = new LoggingBehaviour("A");
-        final var b = new LoggingBehaviour("B");
-        final var condition = new Predicate<State>() {
-            @Override
-            public boolean test(State state) {
-                return state.log.length() > 10;
-            }
-        };
-
-        agent.setBehaviour(a);
-        agent.setTransition(new Agent.Transition<>(a, b, condition));
-        agent.update();
-
-        assertEquals("startA conductA endA startB ", agentState.log);
-    }
-
-    @Test
-    void shouldTransitionBetweenValidStates() {
-        final var agentState = new State();
-        final var agent = new Agent<>(agentState);
-        final var a = new LoggingBehaviour("A");
-        final var b = new LoggingBehaviour("B");
-        final var condition = new Predicate<State>() {
-            @Override
-            public boolean test(State state) {
-                return state.log.length() > 10;
-            }
-        };
-        final var otherCondition = new Predicate<State>() {
-            @Override
-            public boolean test(State state) {
-                return state.log.length() > 100;
-            }
-        };
-
-        agent.setBehaviour(a);
-        agent.setTransition(new Agent.Transition<>(a, b, condition));
-        agent.setTransition(new Agent.Transition<>(b, a, otherCondition));
-        agent.update();
-
-        assertEquals("startA conductA endA startB ", agentState.log);
     }
 
     private static class State {

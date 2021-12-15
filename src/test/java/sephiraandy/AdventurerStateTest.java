@@ -140,7 +140,7 @@ class AdventurerStateTest {
         adventurer.collectLoot();
         adventurer.collectLoot();
 
-        assertFalse(adventurer.areBagsFull());
+        assertFalse(adventurer.bagsAreFull());
     }
 
     @Test
@@ -156,7 +156,7 @@ class AdventurerStateTest {
         adventurer.collectLoot();
         adventurer.collectLoot();
 
-        assertTrue(adventurer.areBagsFull());
+        assertTrue(adventurer.bagsAreFull());
     }
 
     private static class MockOutput implements Consumer<String> {
